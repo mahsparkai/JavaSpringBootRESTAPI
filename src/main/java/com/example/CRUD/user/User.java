@@ -1,11 +1,16 @@
 package com.example.CRUD.user;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -19,17 +24,25 @@ class User {
     private String last_name;
     private String email;
     private String phone_number;
+
+    @JsonIgnore
     private String password;
     private String skype;
     private String linkedin;
     private String instagram;
     private String profile_picture;
 
+    @CreationTimestamp
+    private LocalDateTime created_at;
+
+    @UpdateTimestamp
+    private LocalDateTime updated_at;
+
     //Apparently putting a no parameter constructor is actually very important for the annotations to work wtf Java
     public User() {
     }
 
-    public User(Long id, String first_name, String last_name, String email, String phone_number, String password, String skype, String linkedin, String instagram, String profile_picture) {
+    public User(Long id, String first_name, String last_name, String email, String phone_number, String password, String skype, String linkedin, String instagram, String profile_picture, LocalDateTime created_at, LocalDateTime updated_at) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -40,6 +53,8 @@ class User {
         this.linkedin = linkedin;
         this.instagram = instagram;
         this.profile_picture = profile_picture;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
     }
 
     public Long getId() {
@@ -120,5 +135,18 @@ class User {
 
     public void setProfile_picture(String profile_picture) {
         this.profile_picture = profile_picture;
+    }
+
+    public LocalDateTime getCreated_at() {
+        return created_at;
+    }
+
+
+    public LocalDateTime getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(LocalDateTime updated_at) {
+        this.updated_at = updated_at;
     }
 }

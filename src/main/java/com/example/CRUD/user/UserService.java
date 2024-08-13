@@ -31,6 +31,7 @@ class UserService {
         user.setSkype(updatedUser.getSkype());
         user.setLinkedin(updatedUser.getLinkedin());
         user.setInstagram(updatedUser.getInstagram());
+        userRepository.save(user);
     }
 
     public void deleteUser(Long id){
